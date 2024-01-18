@@ -1,6 +1,7 @@
+import serverOptions from '@/config/server';
 import io from 'socket.io-client'
 
-const socket = io('http://localhost:2020', {
+const socket = io(`${serverOptions.baseURL}:2020`, {
   path: '/socket.io',
   transports: ['websocket'],
   secure: !0,

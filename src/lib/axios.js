@@ -1,6 +1,7 @@
+import serverOptions from '@/config/server'
 import axios from 'axios'
 
-const url = 'http://localhost'
+const url = serverOptions.baseURL
 
 const axiosInstance = axios.create({
   timeout: 100000,
