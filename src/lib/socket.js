@@ -5,13 +5,7 @@ const socket = io(serverOptions.websocketURL, {
   secure: false,
   requestCert: false,
   path: '/socket.io',
-  transports: ['websocket'],
-  secure: !0,
-  timeout: 2e3,
-  reconnection: !0,
-  reconnectionDelay: 1e3,
-  reconnectionDelayMax: 5e3,
-  reconnectionAttempts: 3
+  transports: ['websocket']
 });
 
 export default socket
