@@ -1,45 +1,30 @@
-import useAuth from '@/hooks/useAuth';
 import useTicket from '@/hooks/useTicket';
 import React, { useEffect, useRef } from 'react';
 import { useState } from 'react';
 import logo from '@/assets/img/logo.png'
 import socket from '@/lib/socket';
 import audioPath from 'public/sound/alert/ekiga-vm.wav'
-import serverOptions from '@/config/server';
+import useAuth from '@/hooks/useAuth';
 
 export default function Home() {
   const [tickets, setTickets] = useState([])
 
-  const { login, isAuthenticated } = useAuth()
   const { tickets: passwords } = useTicket()
   const audioRef = useRef(null);
 
-  useEffect(() => {
-    const makeLogin = async () => {
-      await login({
-        client_id: serverOptions.client_id,
-        client_secret: serverOptions.client_secret,
-        username: serverOptions.username,
-        password: serverOptions.password,
-      });
+  const { isAuthenticated } = useAuth()
 
-      if (!isAuthenticated) {
-        console.error('Login failed');
-      }
-    }
+  const fetchRequest = async () => {
+    setTickets(await passwords());
 
-    makeLogin();
-  }, [login]);
+    audioRef.current.play();
+  }
+
+  useEffect(() => fetchRequest, [isAuthenticated])
 
   useEffect(() => {
     if (!audioRef.current)
       return;
-
-    const fetchRequest = async () => {
-      setTickets(await passwords());
-
-      audioRef.current.play(); 
-    }
 
     socket.on('connect', () => {
       socket.emit('register panel', { unity: '1', services: ['1'] })
@@ -59,13 +44,13 @@ export default function Home() {
     socket.on('disconnect', () => {
       console.log('[websocket] disconnected')
     })
-  }, [audioRef, passwords, serverOptions])
+  }, [audioRef, passwords])
 
 
   return (
     <main className='grid grid-cols-10 gap-4 h-screen'>
       <section className='col-span-7 flex justify-between flex-col'>
-        <header className='flex justify-start items-center gap-4 mx-5 mt-5'>
+        <header className='flex justify-start items-center gap-4 mx-6 mt-6'>
           <img src={logo} className='w-20 h-24' />
           <div>
             <h3 className='font-semibold text-2xl'>Secretaria Municipal de Saúde</h3>
@@ -88,9 +73,9 @@ export default function Home() {
         {
           tickets.length > 1 ? (
             [...new Set(tickets.map(ticket => ticket.title))]
-              .filter((_, index) => index > 0)
+              .filter((_, index) => index > 0 && index < 6)
               .map((uniqueTitle, index) => (
-                <p key={index} className='py-2 px-2 text-center text-5xl'>{uniqueTitle}</p>
+                <p key={index} className='py-5 px-2 text-center text-5xl'>{uniqueTitle}</p>
               ))
           ) : <p className='py-2 px-2 text-center text-xl'>Vazio</p>
         }

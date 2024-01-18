@@ -1,8 +1,8 @@
 const serverOptions = {
-    client_id: process.env.CLIENT_ID ?? '',
-    client_secret: process.env.CLIENT_SECRET ?? '',
-    username: process.env.USERNAME ?? '',
-    password: process.env.PASSWORD ?? '',
+    client_id: import.meta.env.VITE_CLIENT_ID || '',
+    client_secret: import.meta.env.VITE_CLIENT_SECRET || '',
+    username: import.meta.env.USERNAME || '',
+    password: import.meta.env.PASSWORD || '',
 }
 
 export default serverOptions

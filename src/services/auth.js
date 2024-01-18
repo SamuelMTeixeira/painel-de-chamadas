@@ -32,6 +32,7 @@ async function login({ client_id, client_secret, username, password }) {
     localStorage.setItem('token', access_token)
   }
 
+  return !!access_token
 }
 
 
