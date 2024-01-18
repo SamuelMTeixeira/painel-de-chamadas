@@ -3,7 +3,7 @@ import React, { useEffect, useRef } from 'react';
 import { useState } from 'react';
 import logo from '@/assets/img/logo.png'
 import socket from '@/lib/socket';
-import audioPath from 'public/sound/alert/ekiga-vm.wav'
+import audioPath from '@/assets/sound/alert/ekiga-vm.wav'
 import useAuth from '@/hooks/useAuth';
 
 export default function Home() {
