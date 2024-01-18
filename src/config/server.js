@@ -3,7 +3,8 @@ const serverOptions = {
     client_secret: import.meta.env.VITE_CLIENT_SECRET || '',
     username: import.meta.env.USERNAME || '',
     password: import.meta.env.PASSWORD || '',
-    baseURL: import.meta.env.VITE_BASE_URL || '',
+    baseURL: import.meta.env.VITE_API_URL || '',
+    websocketURL: import.meta.env.VITE_WEBSOCKET_URL || '',
 }
 
 export default serverOptions

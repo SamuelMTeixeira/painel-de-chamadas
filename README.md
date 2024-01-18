@@ -28,7 +28,12 @@ Para executar o projeto localmente, siga as etapas abaixo:
 2. Crie um arquivo .env na raiz do projeto e configure os tokens necessários:
     ```bash
     VITE_CLIENT_ID='put_your_token_here'
-    VITE_CLIENT_SECRET='put_your_token_here
+    VITE_CLIENT_SECRET='put_your_token_here'
+    VITE_BASE_URL='api_url'
+    VITE_WEBSOCKET_URL='api_url:2020'
+
+    # 🚨 NOTA: O VITE_WEBSOCKET_URL deve ser configurado com o mesmo valor do VITE_BASE_URL, mas com a porta 2020 adicionada ao final.
+    # Se você estiver usando SSL, não adicione o https no início do VITE_WEBSOCKET_URL.
     ```
 
 3. Instale as dependências e inicie a aplicação: (O projeto utiliza o pnpm como gerenciador de pacotes, mas fica a seu critério utilizar o npm ou yarn)
