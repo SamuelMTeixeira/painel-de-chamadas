@@ -14,6 +14,8 @@ O **Painel de Chamadas** é uma aplicação web desenvolvida para auxiliar no ge
 
 - **Novo Sga 2.0.9:** O servidor do painel é alimentado pelo Novo Sga 2.0.9, uma solução robusta para gerenciamento de filas e atendimento ao público. O Novo Sga oferece recursos avançados para melhorar a eficiência e a experiência do usuário.
 
+- **Vitest:**  O projeto utiliza o Vitest para testes unitários. O Vitest é uma ferramenta simples, leve e eficaz para escrever e executar testes em componentes React.
+
 ## ⚙️ Configuração do Projeto
 
 Para executar o projeto localmente, siga as etapas abaixo:
@@ -27,13 +29,9 @@ Para executar o projeto localmente, siga as etapas abaixo:
 
 2. Crie um arquivo .env na raiz do projeto e configure os tokens necessários:
     ```bash
-    VITE_CLIENT_ID='put_your_token_here'
-    VITE_CLIENT_SECRET='put_your_token_here'
+    VITE_CLIENT_ID='put_your_token_here' # Client ID gerado pelo Novo Sga
+    VITE_CLIENT_SECRET='put_your_token_here' # Client secret gerado pelo Novo Sga
     VITE_BASE_URL='api_url'
-    VITE_WEBSOCKET_URL='api_url:2020'
-
-    # 🚨 NOTA: O VITE_WEBSOCKET_URL deve ser configurado com o mesmo valor do VITE_BASE_URL, mas com a porta 2020 adicionada ao final.
-    # Se você estiver usando SSL, não adicione o https no início do VITE_WEBSOCKET_URL.
     ```
 
 3. Instale as dependências e inicie a aplicação: (O projeto utiliza o pnpm como gerenciador de pacotes, mas fica a seu critério utilizar o npm ou yarn)

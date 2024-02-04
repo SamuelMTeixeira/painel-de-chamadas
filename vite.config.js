@@ -4,4 +4,9 @@ import jsconfigPaths from 'vite-jsconfig-paths'
 
 export default defineConfig({
   plugins: [react(), jsconfigPaths()],
+  test: {
+    globals: true,
+    setupFiles: ['./test/setup.js'],
+    environment: 'jsdom'
+  }
 })
