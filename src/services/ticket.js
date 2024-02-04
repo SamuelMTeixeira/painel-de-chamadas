@@ -35,6 +35,7 @@ function normalizeMessage(data) {
         subtitle: data.local + ' ' + ('00' + data.numeroLocal).slice(-2),
         description: data.prioridade,
         paciente: data.nomeCliente,
+        guiche: data.numeroLocal,
         $data: data
     }
 }

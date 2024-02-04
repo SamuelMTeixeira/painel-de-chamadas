@@ -46,22 +46,38 @@ export default function Home() {
     })
   }, [audioRef, passwords])
 
-
   return (
     <main className='grid grid-cols-10 gap-4 h-screen'>
       <section className='col-span-7 flex justify-between flex-col'>
         <header className='flex justify-start items-center gap-4 mx-6 mt-6'>
           <img src={logo} className='w-20 h-24' />
           <div>
-            <h3 className='font-semibold text-2xl'>Secretaria Municipal de Saúde</h3>
-            <h3 className='font-semibold text-2xl'>Prefeitura de Teófilo otoni</h3>
+            <h4 className='font-semibold text-2xl'>Secretaria Municipal de Saúde</h4>
+            <h4 className='font-semibold text-2xl'>Prefeitura de Teófilo otoni</h4>
           </div>
         </header>
 
         <div>
-          <h2 className='text-5xl text-center'>{tickets[0]?.description || ''}</h2>
-          <h1 className='text-[11rem] font-bold text-center leading-tight'>{tickets[0]?.title || 'A000'}</h1>
-          <p className='text-6xl font-medium text-center'>{tickets[0]?.paciente || ''}</p>
+          <div>
+            <p
+              data-testid='guiche'
+              className='text-5xl text-center'>
+              {`Guichê ${tickets[0]?.guiche || ''}`}
+            </p>
+
+            <p
+              data-testid='prioridade'
+              className='text-5xl text-center'>
+              {`Prioridade ${tickets[0]?.description || ''}`}
+            </p>
+          </div>
+
+          <h1
+            data-testid='senha'
+            className='text-[11rem] font-bold text-center leading-tight'>{tickets[0]?.title || 'A000'}</h1>
+          <p
+            data-testid='paciente'
+            className='text-6xl font-medium text-center'>{tickets[0]?.paciente || ''}</p>
         </div>
 
         <div />
@@ -69,7 +85,7 @@ export default function Home() {
 
 
       <aside className='col-span-3 bg-blue-400'>
-        <h1 className='text-center font-semibold text-6xl my-6'>Histórico</h1>
+        <h3 className='text-center font-semibold text-6xl my-6'>Histórico</h3>
         {
           tickets.length > 1 ? (
             [...new Set(tickets.map(ticket => ticket.title))]
