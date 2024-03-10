@@ -62,13 +62,13 @@ export default function Home() {
             <p
               data-testid='guiche'
               className='text-5xl text-center'>
-              {`Guichê ${tickets[0]?.guiche || ''}`}
+              {`Guichê ${tickets[0]?.guiche || '0'}`}
             </p>
 
             <p
               data-testid='prioridade'
               className='text-5xl text-center'>
-              {`Prioridade ${tickets[0]?.description || ''}`}
+              {`Atendimento ${tickets[0]?.description || ''}`}
             </p>
           </div>
 

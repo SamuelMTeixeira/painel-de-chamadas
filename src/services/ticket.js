@@ -1,19 +1,34 @@
 import axiosInstance from "@/lib/axios"
+import { updateToken } from "./auth"
+import serverOptions from "@/config/server"
 
 export async function fectchTickets() {
     return new Promise((resolve, reject) => {
         axiosInstance.get('unidades/1/painel?servicos=1')
             .then(response => {
+                updateToken({
+                    client_id: serverOptions.client_id,
+                    client_secret: serverOptions.client_secret,
+                    refresh_token: localStorage.getItem('refresh_token')
+                })
+                
                 resolve(response.data)
             }, error => {
-                let message = error.message
-                if (error.response) {
-                    message = error.response.statusText
-                    if (error.response.data && error.response.data.error_description) {
-                        message += ': ' + error.response.data.error_description
-                    }
-                }
-                reject(message)
+
+            
+                   
+                
+                /*   console.log(error)
+   
+                   let message = error.message
+                   if (error.response) {
+                       message = error.response.statusText
+                       if (error.response.data && error.response.data.error_description) {
+                           message += ': ' + error.response.data.error_description
+                       }
+                   }
+                   reject(message)
+                   */
             })
     })
 }
