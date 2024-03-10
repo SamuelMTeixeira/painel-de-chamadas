@@ -11,6 +11,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import logo from '@/assets/img/logo.png'
+import { SignIn } from "@phosphor-icons/react"
 
 const formSchema = z.object({
     username: z.string({
@@ -108,43 +109,14 @@ const Settings = () => {
                                         </FormItem>
                                     )}
                                 />
-                                <Button type="submit">
+                                <Button type="submit" className="w-full">
+                                    <SignIn className="mr-2 h-5 w-5" />
                                     Acessar
                                 </Button>
                             </form>
                         </Form>
                     </CardContent>
                 </Card>
-
-                {
-                    /*
-
-<div className="bg-white shadow w-full rounded-lg divide-y divide-gray-200">
-                    <form onSubmit={handleSubmit} className="px-5 py-7">
-                        <label className="font-semibold text-sm text-gray-600 pb-1 block">Usuario</label>
-                        <input
-                            required
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
-                            type="text"
-                            className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full" />
-                        <label className="font-semibold text-sm text-gray-600 pb-1 block">Senha</label>
-                        <input
-                            required
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            type="password"
-                            className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full" />
-
-
-                        <Button type="submit" >
-                            Acessar o painel
-                        </Button>
-                    </form>
-                </div>
-
-                    */
-                }
             </section>
         </main>
     );
