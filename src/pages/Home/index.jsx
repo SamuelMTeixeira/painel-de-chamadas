@@ -12,13 +12,15 @@ export default function Home() {
   const { tickets: passwords } = useTicket()
   const audioRef = useRef(null);
 
-  const { isAuthenticated } = useAuth()
+  const { isAuthenticated, refreshToken, isTokenExpired } = useAuth()
 
   const fetchRequest = async () => {
     setTickets(await passwords());
 
     audioRef.current.play();
   }
+
+  useEffect(() => refreshToken, [isTokenExpired])
 
   useEffect(() => fetchRequest, [isAuthenticated])
 
@@ -31,7 +33,7 @@ export default function Home() {
       console.log('[websocket] connected')
     })
     socket.on('register ok', () => {
-      console.log('[websocket] register ok')
+      console.log('[websocket] client verified and registered by the api')
       fetchRequest()
     })
     socket.on('call ticket', () => {
@@ -84,7 +86,7 @@ export default function Home() {
       </section>
 
 
-      <aside className='col-span-3 bg-blue-400'>
+      <aside className='col-span-3 bg-primary/[.7]'>
         <h3 className='text-center font-semibold text-6xl my-6'>Histórico</h3>
         {
           tickets.length > 1 ? (
