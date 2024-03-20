@@ -12,14 +12,14 @@ const router = createBrowserRouter([
 
             if (!isAuthenticated) {
                 console.warn('Usuário não autenticado')
-                return redirect("/settings");
+                return redirect("/login");
             }
 
             return null
         },
     },
     {
-        path: "/settings",
+        path: "/login",
         element: <Settings />
     }
 ]);

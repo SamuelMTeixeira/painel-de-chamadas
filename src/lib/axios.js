@@ -10,12 +10,8 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   async (config) => {
-
-    const date = new Date()
-    const expire_date = new Date(localStorage.getItem('expire_date'))
     const token = localStorage.getItem('token')
-    
-    if (token && !(date > expire_date)) {
+    if (token) {
       config.headers['Authorization'] = `Bearer ${token}`
     }
     return config
