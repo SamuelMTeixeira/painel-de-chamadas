@@ -5,7 +5,7 @@ const url = serverOptions.baseURL
 
 const axiosInstance = axios.create({
   timeout: 100000,
-  baseURL: `${url}/api/`
+  baseURL: `${url}/api/`,
 })
 
 axiosInstance.interceptors.request.use(
@@ -16,8 +16,7 @@ axiosInstance.interceptors.request.use(
     }
     return config
   },
-  error => Promise.reject(error)
+  (error) => Promise.reject(error),
 )
-
 
 export default axiosInstance
