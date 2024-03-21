@@ -1,10 +1,10 @@
 import useTicket from '@/hooks/useTicket';
-import React, { useEffect, useRef } from 'react';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import logo from '@/assets/img/logo.png'
 import socket from '@/lib/socket';
 import audioPath from '@/assets/sound/alert/ekiga-vm.wav'
 import useAuth from '@/hooks/useAuth';
+import CommandActions from '@/components/home/command-actions';
 
 export default function Home() {
   const [tickets, setTickets] = useState([])
@@ -98,6 +98,8 @@ export default function Home() {
           ) : <p className='py-2 px-2 text-center text-xl'>Vazio</p>
         }
       </aside>
+
+      <CommandActions />
 
       <audio ref={audioRef} src={audioPath} />
     </main>

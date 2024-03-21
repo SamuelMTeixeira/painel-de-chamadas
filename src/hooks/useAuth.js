@@ -8,6 +8,12 @@ export default function useAuth() {
     const isAuthenticated = !!token
     const isTokenExpired = new Date() > expire_date
 
+    const logout = () => {
+        localStorage.removeItem('token')
+        localStorage.removeItem('refresh_token')
+        localStorage.removeItem('expire_date')
+    }
+
     const refreshToken = async () => {
         if (!isTokenExpired) return
 
@@ -18,5 +24,5 @@ export default function useAuth() {
         })
     }
 
-    return { login, isAuthenticated, updateToken, isTokenExpired, refreshToken }
+    return { login, isAuthenticated, updateToken, isTokenExpired, refreshToken, logout }
 }
