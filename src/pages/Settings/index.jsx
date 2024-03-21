@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import serverOptions from "@/config/server";
 import useAuth from "@/hooks/useAuth";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -11,7 +11,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import logo from '@/assets/img/logo.png'
-import { SignIn } from "@phosphor-icons/react"
+import { SignIn, Eye, EyeSlash } from "@phosphor-icons/react"
 
 const formSchema = z.object({
     username: z.string({
@@ -28,6 +28,7 @@ const formSchema = z.object({
 
 
 const Settings = () => {
+    const [seePassword, setSeePassword] = useState(false)
 
     const form = useForm({
         resolver: zodResolver(formSchema),
@@ -73,7 +74,7 @@ const Settings = () => {
 
                 <img src={logo} className="h-auto w-[5.5rem]" />
 
-                <Card>
+                <Card className="min-w-full lg:min-w-[450px]">
                     <CardHeader>
                         <CardTitle>Painel web</CardTitle>
                         <CardDescription>Faça login para ter acesso ao painel de senhas</CardDescription>
@@ -103,7 +104,19 @@ const Settings = () => {
                                         <FormItem>
                                             <FormLabel>Senha</FormLabel>
                                             <FormControl>
-                                                <Input type="password" {...field} />
+                                                <div className="flex justify-end">
+
+                                                    <Input type={seePassword ? "text" : "password"} className="pr-8" {...field} />
+
+                                                    <Button
+                                                        type="button"
+                                                        onClick={() => setSeePassword(!seePassword)}
+                                                        className="absolute"
+                                                        variant="ghost"
+                                                        size="icon">
+                                                        {seePassword ? <EyeSlash className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+                                                    </Button>
+                                                </div>
                                             </FormControl>
                                             <FormMessage />
                                         </FormItem>
