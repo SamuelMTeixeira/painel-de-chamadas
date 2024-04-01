@@ -32,6 +32,7 @@ Para executar o projeto localmente, siga as etapas abaixo:
     VITE_CLIENT_ID='put_your_token_here' # Client ID gerado pelo Novo Sga
     VITE_CLIENT_SECRET='put_your_token_here' # Client secret gerado pelo Novo Sga
     VITE_BASE_URL='api_url'
+    VITE_SERVICES='1,2' # Número de serviços configurado
     ```
 
 3. Instale as dependências e inicie a aplicação: (O projeto utiliza o pnpm como gerenciador de pacotes, mas fica a seu critério utilizar o npm ou yarn)
@@ -39,6 +40,16 @@ Para executar o projeto localmente, siga as etapas abaixo:
     pnpm install
     pnpm dev
     ```
+
+4. Se desejar subir o servidor NovoSGA de desenvolvimento, siga as instruções abaixo:
+    ```bash
+    docker compose up -d
+    ```
+    Depois entre no [localhost:80](http://localhost:80) e acesse com as credenciais:
+        *user*: admin
+        *password*: 123456
+    
+    Para configurações do serviço e de como gerar o token, consulte a [documentação oficial](https://novosga.org/docs/current/)
 
 ## 🤝 Contribuições
 Contribuições são bem-vindas! Sinta-se à vontade para enviar sugestões, relatar problemas ou contribuir diretamente para o desenvolvimento do projeto.
