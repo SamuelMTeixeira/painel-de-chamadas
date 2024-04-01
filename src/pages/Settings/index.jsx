@@ -85,7 +85,11 @@ const Settings = () => {
   return (
     <main className="min-h-screen bg-gray-100 flex flex-col justify-center sm:py-12">
       <section className="p-10 xs:p-0 mx-auto md:w-full md:max-w-md flex flex-col items-center gap-4">
-        <img src={logo} className="h-auto w-[5.5rem]" />
+        <img
+          src={logo}
+          className="h-auto w-[5.5rem]"
+          alt="Logo da Prefeitura"
+        />
 
         <Card className="min-w-full lg:min-w-[450px]">
           <CardHeader>
