@@ -13,6 +13,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - refactor: show sector info in panel
 
+### Fixed
+
+- fix: font imports on top of file
+
 ## [v1.2.0] - 2024-04-01
 
 ### Added
