@@ -1,8 +1,9 @@
 import axiosInstance from '@/lib/axios'
 import serverOptions from '@/config/server'
+import useAuth from '@/hooks/useAuth'
 
-export async function fectchTickets() {
-  return new Promise((resolve, reject) => {
+export async function fetchTickets() {
+  return new Promise((resolve) => {
     axiosInstance
       .get(`unidades/1/painel?servicos=${serverOptions.services}`)
       .then(
@@ -10,6 +11,13 @@ export async function fectchTickets() {
           resolve(response.data)
         },
         (error) => {
+          const originalRequest = error.config
+          const { refreshToken } = useAuth()
+          if (error.response.status === 403 && !originalRequest._retry) {
+            originalRequest._retry = true
+            return Promise.resolve(refreshToken)
+          }
+
           let message = error.message
           if (error.response) {
             message = error.response.statusText
@@ -17,14 +25,14 @@ export async function fectchTickets() {
               message += ': ' + error.response.data.error_description
             }
           }
-          reject(message)
+          return Promise.reject(message)
         },
       )
   })
 }
 
 export async function tickets() {
-  const tickets = await fectchTickets()
+  const tickets = await fetchTickets()
 
   const ticketsList = tickets.map((ticket) => normalizeMessage(ticket))
 

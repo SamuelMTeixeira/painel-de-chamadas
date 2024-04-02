@@ -114,13 +114,13 @@ export default function Home() {
               .map((uniqueTitle, index) => (
                 <p
                   key={index}
-                  className="py-5 px-2 text-center text-5xl font-raleway"
+                  className="py-5 px-2 text-center text-5xl font-nunito font-medium"
                 >
                   {uniqueTitle}
                 </p>
               ))
           ) : (
-            <p className="py-2 px-2 text-center text-xl">Vazio</p>
+            <p className="py-2 px-2 text-center text-5xl font-nunito">Vazio</p>
           )}
         </div>
       </aside>
