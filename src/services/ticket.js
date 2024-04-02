@@ -40,6 +40,7 @@ function normalizeMessage(data) {
     description: data.prioridade,
     paciente: data.nomeCliente,
     guiche: data.numeroLocal,
+    setor: data.servico.nome,
     $data: data,
   }
 }

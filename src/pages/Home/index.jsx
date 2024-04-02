@@ -70,14 +70,16 @@ export default function Home() {
           <div>
             <p
               data-testid="guiche"
-              className="text-5xl text-center font-raleway"
+              className="text-5xl text-center font-raleway leading-tight"
             >
-              {`Guichê ${tickets[0]?.guiche || '0'}`}
+              {`Guichê ${tickets[0]?.guiche || '0'} - Setor ${
+                tickets[0]?.setor || '...'
+              }`}
             </p>
 
             <p
               data-testid="prioridade"
-              className="text-5xl text-center font-raleway"
+              className="text-5xl text-center font-raleway leading-tight"
             >
               {`Atendimento ${tickets[0]?.description || ''}`}
             </p>
@@ -101,7 +103,7 @@ export default function Home() {
       </section>
 
       <aside className="col-span-3 bg-primary/[.7] rounded-l-2xl flex flex-col py-2">
-        <h3 className="text-center font-semibold text-6xl my-6 font-nunito">
+        <h3 className="text-center font-bold text-6xl my-6 font-nunito">
           Histórico
         </h3>
 
