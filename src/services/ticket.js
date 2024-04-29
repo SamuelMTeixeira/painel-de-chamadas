@@ -1,6 +1,5 @@
 import axiosInstance from '@/lib/axios'
 import serverOptions from '@/config/server'
-import useAuth from '@/hooks/useAuth'
 
 export async function fetchTickets() {
   return new Promise((resolve) => {
@@ -11,13 +10,6 @@ export async function fetchTickets() {
           resolve(response.data)
         },
         (error) => {
-          const originalRequest = error.config
-          const { refreshToken } = useAuth()
-          if (error.response.status === 403 && !originalRequest._retry) {
-            originalRequest._retry = true
-            return Promise.resolve(refreshToken)
-          }
-
           let message = error.message
           if (error.response) {
             message = error.response.statusText
