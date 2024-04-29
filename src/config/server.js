@@ -4,6 +4,7 @@ const serverOptions = {
   username: import.meta.env.USERNAME || '',
   password: import.meta.env.PASSWORD || '',
   baseURL: import.meta.env.VITE_API_URL || '',
+  websocketURL: import.meta.env.VITE_WEBSOCKET_URL || '',
   services: import.meta.env.VITE_SERVICES || '1',
 }
 

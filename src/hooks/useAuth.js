@@ -1,5 +1,4 @@
-import { login, updateToken } from '@/services/auth'
-import config from '@/config/server'
+import { login } from '@/services/auth'
 
 export default function useAuth() {
   const expire_date = new Date(localStorage.getItem('expire_date'))
@@ -14,22 +13,10 @@ export default function useAuth() {
     localStorage.removeItem('expire_date')
   }
 
-  const refreshToken = async () => {
-    if (!isTokenExpired) return
-
-    await updateToken({
-      client_id: config.client_id,
-      client_secret: config.client_secret,
-      refresh_token: localStorage.getItem('refresh_token'),
-    })
-  }
-
   return {
     login,
     isAuthenticated,
-    updateToken,
     isTokenExpired,
-    refreshToken,
     logout,
   }
 }

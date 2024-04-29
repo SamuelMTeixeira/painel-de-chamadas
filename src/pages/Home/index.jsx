@@ -13,15 +13,13 @@ export default function Home() {
   const { tickets: passwords } = useTicket()
   const audioRef = useRef(null)
 
-  const { isAuthenticated, refreshToken, isTokenExpired } = useAuth()
+  const { isAuthenticated } = useAuth()
 
   const fetchRequest = async () => {
     setTickets(await passwords())
 
     audioRef.current.play()
   }
-
-  useEffect(() => refreshToken, [isTokenExpired])
 
   useEffect(() => fetchRequest, [isAuthenticated])
 
