@@ -49,7 +49,10 @@ Para executar o projeto localmente, siga as etapas abaixo:
         *user*: admin
         *password*: 123456
     
-    Para configurações do serviço e de como gerar o token, consulte a [documentação oficial](https://novosga.org/docs/current/)
+
+    Para fazer sair do usuário, basta precionar o comando `ctrl + m` e selecionar a opção sair.
+
+    Para configurações do serviço e de como gerar o token, consulte a [documentação oficial do novoSGA](https://novosga.org/docs/current/)
 
 ## 🤝 Contribuições
 Contribuições são bem-vindas! Sinta-se à vontade para enviar sugestões, relatar problemas ou contribuir diretamente para o desenvolvimento do projeto.

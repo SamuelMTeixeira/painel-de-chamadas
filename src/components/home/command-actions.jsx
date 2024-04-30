@@ -7,7 +7,7 @@ import {
   CommandList,
 } from '@/components/ui/command'
 
-import { SignOut, GearSix } from '@phosphor-icons/react'
+import { SignOut } from '@phosphor-icons/react'
 
 import { useEffect, useState } from 'react'
 import { Button } from '../ui/button'
@@ -51,16 +51,6 @@ export default function CommandActions() {
             >
               <SignOut className="mr-2 h-4 w-4" />
               <span>Sair</span>
-            </Button>
-          </CommandItem>
-
-          <CommandItem className="aria-selected:bg-background !p-0 !m-0">
-            <Button
-              variant={'ghost'}
-              className="w-full justify-start cursor-default px-2 py-1.5 text-sm font-normal"
-            >
-              <GearSix className="mr-2 h-4 w-4" />
-              <span>Configurações</span>
             </Button>
           </CommandItem>
         </CommandGroup>

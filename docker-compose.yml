@@ -32,6 +32,7 @@ services:
       # Set TimeZone and locale
       TZ: 'America/Sao_Paulo'
       LANGUAGE: 'pt_BR'
+
   mysqldb:
     image: mysql:5.7
     restart: always

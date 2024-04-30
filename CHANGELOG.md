@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v1.2.2] - 2024-04-30
+
+### Added
+
+- build: add axios-auth-refresh to refresh token automatically and integrate with axios
+
+### Changed
+
+- refactor: unnecessary data when there are no appointment
+- refactor: separation of websocket url and api url
+
+### Fixed
+
+- fix: websocket not working with htpps and refresh token interceptor
+
 ## [v1.2.1] - 2024-04-02
 
 ### Changed

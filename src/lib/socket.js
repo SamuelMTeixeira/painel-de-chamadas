@@ -1,15 +1,15 @@
 import serverOptions from '@/config/server'
 import io from 'socket.io-client'
 
-const socket = io(`${serverOptions.baseURL}:2020`, {
+const socket = io(`${serverOptions.websocketURL}`, {
   path: '/socket.io',
   transports: ['websocket'],
   secure: !0,
-  timeout: 2e3,
+  timeout: 60e3,
   reconnection: !0,
-  reconnectionDelay: 1e3,
-  reconnectionDelayMax: 5e3,
-  reconnectionAttempts: 3,
+  reconnectionDelay: 80e3,
+  reconnectionDelayMax: 30e3,
+  reconnectionAttempts: 50,
 })
 
 export default socket

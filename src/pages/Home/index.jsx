@@ -13,15 +13,13 @@ export default function Home() {
   const { tickets: passwords } = useTicket()
   const audioRef = useRef(null)
 
-  const { isAuthenticated, refreshToken, isTokenExpired } = useAuth()
+  const { isAuthenticated } = useAuth()
 
   const fetchRequest = async () => {
     setTickets(await passwords())
 
     audioRef.current.play()
   }
-
-  useEffect(() => refreshToken, [isTokenExpired])
 
   useEffect(() => fetchRequest, [isAuthenticated])
 
@@ -68,20 +66,30 @@ export default function Home() {
 
         <div>
           <div>
-            <p
-              data-testid="guiche"
-              className="text-5xl text-center font-raleway leading-tight"
-            >
-              {`Guichê ${tickets[0]?.guiche || '0'} - Setor ${
-                tickets[0]?.setor || '...'
-              }`}
-            </p>
+            <div className="flex gap-2 justify-center">
+              <p
+                data-testid="guiche"
+                className="text-5xl text-center font-raleway leading-tight"
+              >
+                {tickets[0]?.guiche ? `Guichê ${tickets[0]?.guiche}` : ''}
+              </p>
+
+              <span className="text-5xl font-raleway leading-tight ">
+                {!!tickets[0]?.guiche && !!tickets[0]?.setor && '-'}
+              </span>
+
+              <p className="text-5xl text-center font-raleway leading-tight">
+                {tickets[0]?.setor ? `Setor ${tickets[0]?.setor}` : ''}
+              </p>
+            </div>
 
             <p
               data-testid="prioridade"
               className="text-5xl text-center font-raleway leading-tight"
             >
-              {`Atendimento ${tickets[0]?.description || ''}`}
+              {tickets[0]?.description
+                ? `Atendimento ${tickets[0]?.description}`
+                : ''}
             </p>
           </div>
 
