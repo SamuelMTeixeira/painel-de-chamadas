@@ -3,7 +3,6 @@ import { useEffect, useRef, useState } from 'react'
 import logo from '@/assets/img/logo.png'
 import socket from '@/lib/socket'
 import audioPath from '@/assets/sound/alert/ekiga-vm.wav'
-import useAuth from '@/hooks/useAuth'
 import CommandActions from '@/components/home/command-actions'
 import serverOptions from '@/config/server'
 
@@ -13,15 +12,11 @@ export default function Home() {
   const { tickets: passwords } = useTicket()
   const audioRef = useRef(null)
 
-  const { isAuthenticated } = useAuth()
-
   const fetchRequest = async () => {
     setTickets(await passwords())
 
     audioRef.current.play()
   }
-
-  useEffect(() => fetchRequest, [isAuthenticated])
 
   useEffect(() => {
     if (!audioRef.current) return
