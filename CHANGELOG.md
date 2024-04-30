@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - refactor: unnecessary data when there are no appointment
+- refactor: separation of websocket url and api url
 
 ### Fixed
 
