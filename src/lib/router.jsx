@@ -11,7 +11,9 @@ const router = createBrowserRouter([
       const { isAuthenticated } = authHook()
 
       if (!isAuthenticated) {
-        console.warn('Usuário não autenticado')
+        console.warn(
+          'Usuário não autenticado, redirecionando para a página de login.',
+        )
         return redirect('/login')
       }
 

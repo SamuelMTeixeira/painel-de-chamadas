@@ -2,7 +2,6 @@ import { Button } from '@/components/ui/button'
 import serverOptions from '@/config/server'
 import useAuth from '@/hooks/useAuth'
 import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
@@ -44,6 +43,12 @@ const formSchema = z.object({
 })
 
 const Settings = () => {
+  const { login, isAuthenticated } = useAuth()
+
+  useEffect(() => {
+    if (isAuthenticated) window.location.href = '/'
+  }, [])
+
   const [seePassword, setSeePassword] = useState(false)
 
   const form = useForm({
@@ -60,7 +65,7 @@ const Settings = () => {
     await login({ client_id, client_secret, username, password })
       .then((isAuth) => {
         if (isAuth) {
-          navigate('/')
+          window.location.href = '/'
         }
       })
       .catch(() => {
@@ -74,13 +79,6 @@ const Settings = () => {
         })
       })
   }
-
-  const { login, isAuthenticated } = useAuth()
-  const navigate = useNavigate()
-
-  useEffect(() => {
-    if (isAuthenticated) navigate('/')
-  }, [])
 
   return (
     <main className="min-h-screen bg-gray-100 flex flex-col justify-center sm:py-12">
