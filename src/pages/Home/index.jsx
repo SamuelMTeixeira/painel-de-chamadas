@@ -1,10 +1,9 @@
 import useTicket from '@/hooks/useTicket'
 import { useEffect, useRef, useState } from 'react'
 import logo from '@/assets/img/logo.png'
-import socket from '@/lib/socket'
 import audioPath from '@/assets/sound/alert/ekiga-vm.wav'
 import CommandActions from '@/components/home/command-actions'
-import serverOptions from '@/config/server'
+import mercure from '@/lib/mecure'
 
 export default function Home() {
   const [tickets, setTickets] = useState([])
@@ -18,31 +17,19 @@ export default function Home() {
     audioRef.current.play()
   }
 
+  useEffect(() => fetchRequest, [])
+
   useEffect(() => {
     if (!audioRef.current) return
 
-    socket.on('connect', () => {
-      const services = serverOptions.services
-        .split(',')
-        .map((service) => service.trim())
-      socket.emit('register panel', { unity: '1', services: services })
-      console.log('[websocket] connected')
-    })
-    socket.on('register ok', () => {
-      console.log('[websocket] client verified and registered by the api')
+    mercure.onmessage = function () {
       fetchRequest()
-    })
-    socket.on('call ticket', () => {
-      console.log('[websocket] call ticket')
-      fetchRequest()
-    })
-    socket.on('error', (e) => {
-      console.log('[websocket] error', e)
-    })
-    socket.on('disconnect', () => {
-      console.log('[websocket] disconnected')
-    })
-  }, [audioRef, passwords])
+    }
+
+    mercure.onerror = function (error) {
+      console.error('Erro de conexão:', error)
+    }
+  }, [audioRef])
 
   return (
     <main className="grid grid-cols-10 gap-4 h-screen">
