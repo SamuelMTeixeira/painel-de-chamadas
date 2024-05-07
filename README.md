@@ -32,6 +32,7 @@ Para executar o projeto localmente, siga as etapas abaixo:
     VITE_CLIENT_ID='put_your_token_here' # Client ID gerado pelo Novo Sga
     VITE_CLIENT_SECRET='put_your_token_here' # Client secret gerado pelo Novo Sga
     VITE_BASE_URL='api_url'
+    VITE_MERCURE_URL='mercure_url' # Url do Mercure configurado. ex.: http://localhost:3000/.well-known/mercure
     VITE_SERVICES='1,2' # Número de serviços configurado
     ```
 

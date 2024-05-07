@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v1.3.0] - 2024-05-07
+
+### Added
+
+- Add support for NovoSGA 2.1
+
+### Changed
+
+- refactor: remove websocket client and add mercure
+
 ## [v1.2.3] - 2024-04-30
 
 ### Fixed
