@@ -1,19 +1,15 @@
 import useTicket from '@/hooks/useTicket'
-import { useEffect, useRef, useState } from 'react'
-import logo from '@/assets/img/logo.png'
+import { useEffect, useRef } from 'react'
 import audioPath from '@/assets/sound/alert/ekiga-vm.wav'
-import CommandActions from '@/components/home/command-actions'
+
 import mercure from '@/lib/mecure'
+import HomeTemplate from '@/components/templates/home-template'
 
 export default function Home() {
-  const [tickets, setTickets] = useState([])
-
-  const { tickets: passwords } = useTicket()
+  const { tickets, isLoading } = useTicket()
   const audioRef = useRef(null)
 
   const fetchRequest = async () => {
-    setTickets(await passwords())
-
     audioRef.current.play()
   }
 
@@ -32,36 +28,29 @@ export default function Home() {
   }, [audioRef])
 
   return (
-    <main className="grid grid-cols-10 gap-4 h-screen">
-      <section className="col-span-7 flex justify-between flex-col">
-        <header className="flex justify-start items-center gap-4 mx-6 mt-6">
-          <img src={logo} className="w-20 h-24" alt="Logo da Prefeitura" />
-          <div>
-            <h4 className="font-semibold text-2xl">
-              Secretaria Municipal de Saúde
-            </h4>
-            <h4 className="font-semibold text-2xl">
-              Prefeitura de Teófilo otoni
-            </h4>
-          </div>
-        </header>
-
-        <div>
+    <HomeTemplate tickets={tickets}>
+      {isLoading ? (
+        <h1
+          data-testid="senha"
+          className="text-[12rem] font-bold text-center leading-tight font-nunito"
+        >
+          A000
+        </h1>
+      ) : (
+        <article>
           <div>
             <div className="flex gap-2 justify-center">
               <p
                 data-testid="guiche"
                 className="text-5xl text-center font-raleway leading-tight"
               >
-                {tickets[0]?.guiche ? `Guichê ${tickets[0]?.guiche}` : ''}
+                {`Guichê ${tickets[0]?.guiche}`}
               </p>
 
-              <span className="text-5xl font-raleway leading-tight ">
-                {!!tickets[0]?.guiche && !!tickets[0]?.setor && '-'}
-              </span>
+              <span className="text-5xl font-raleway leading-tight ">-</span>
 
               <p className="text-5xl text-center font-raleway leading-tight">
-                {tickets[0]?.setor ? `Setor ${tickets[0]?.setor}` : ''}
+                {`Setor ${tickets[0]?.setor}`}
               </p>
             </div>
 
@@ -69,9 +58,7 @@ export default function Home() {
               data-testid="prioridade"
               className="text-5xl text-center font-raleway leading-tight"
             >
-              {tickets[0]?.description
-                ? `Atendimento ${tickets[0]?.description}`
-                : ''}
+              {`Atendimento ${tickets[0]?.description}`}
             </p>
           </div>
 
@@ -79,45 +66,18 @@ export default function Home() {
             data-testid="senha"
             className="text-[12rem] font-bold text-center leading-tight font-nunito"
           >
-            {tickets[0]?.title || 'A000'}
+            {tickets[0]?.title}
           </h1>
           <p
             data-testid="paciente"
             className="text-6xl font-medium text-center font-raleway"
           >
-            {tickets[0]?.paciente || ''}
+            {tickets[0]?.paciente}
           </p>
-        </div>
-
-        <div />
-      </section>
-
-      <aside className="col-span-3 bg-primary/[.7] rounded-l-2xl flex flex-col py-2">
-        <h3 className="text-center font-bold text-6xl my-6 font-nunito">
-          Histórico
-        </h3>
-
-        <div className="flex-1 flex flex-col justify-evenly items-center">
-          {tickets.length > 1 ? (
-            [...new Set(tickets.map((ticket) => ticket.title))]
-              .filter((_, index) => index > 0 && index < 6)
-              .map((uniqueTitle, index) => (
-                <p
-                  key={index}
-                  className="py-5 px-2 text-center text-5xl font-nunito font-medium"
-                >
-                  {uniqueTitle}
-                </p>
-              ))
-          ) : (
-            <p className="py-2 px-2 text-center text-5xl font-nunito">Vazio</p>
-          )}
-        </div>
-      </aside>
-
-      <CommandActions />
+        </article>
+      )}
 
       <audio ref={audioRef} src={audioPath} />
-    </main>
+    </HomeTemplate>
   )
 }
