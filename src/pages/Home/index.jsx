@@ -6,11 +6,12 @@ import mercure from '@/lib/mecure'
 import HomeTemplate from '@/components/templates/home-template'
 
 export default function Home() {
-  const { tickets, isLoading } = useTicket()
+  const { tickets, isPending, refetch } = useTicket()
   const audioRef = useRef(null)
 
   const fetchRequest = async () => {
     audioRef.current.play()
+    refetch()
   }
 
   useEffect(() => fetchRequest, [])
@@ -29,7 +30,7 @@ export default function Home() {
 
   return (
     <HomeTemplate tickets={tickets}>
-      {isLoading ? (
+      {isPending ? (
         <h1
           data-testid="senha"
           className="text-[12rem] font-bold text-center leading-tight font-nunito"

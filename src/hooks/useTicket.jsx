@@ -6,6 +6,8 @@ export default function useTicket() {
     data: tickets,
     isFetching,
     isLoading,
+    isPending,
+    refetch,
   } = useQuery({
     queryKey: ['tickets'],
     queryFn: () => fetchTickets(),
@@ -15,5 +17,7 @@ export default function useTicket() {
     tickets,
     isFetching,
     isLoading,
+    isPending,
+    refetch,
   }
 }

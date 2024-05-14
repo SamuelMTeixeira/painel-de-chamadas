@@ -1,4 +1,3 @@
-import authHook from '@/hooks/useAuth'
 import Home from '@/pages/Home'
 import Settings from '@/pages/Settings'
 import { createBrowserRouter, redirect } from 'react-router-dom'
@@ -8,7 +7,7 @@ const router = createBrowserRouter([
     path: '/',
     element: <Home />,
     loader: async () => {
-      const { isAuthenticated } = authHook()
+      const isAuthenticated = !!localStorage.getItem('token')
 
       if (!isAuthenticated) {
         console.warn(
@@ -23,6 +22,18 @@ const router = createBrowserRouter([
   {
     path: '/login',
     element: <Settings />,
+    loader: async () => {
+      const isAuthenticated = !!localStorage.getItem('token')
+
+      if (isAuthenticated) {
+        console.warn(
+          'Usuário autenticado, redirecionando para a página inicial.',
+        )
+        return redirect('/')
+      }
+
+      return null
+    },
   },
 ])
 

@@ -1,5 +1,4 @@
 import { Button } from '@/components/ui/button'
-import serverOptions from '@/config/server'
 import useAuth from '@/hooks/useAuth'
 import { useEffect, useState } from 'react'
 
@@ -23,7 +22,7 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import logo from '@/assets/img/logo.png'
-import { SignIn, Eye, EyeSlash } from '@phosphor-icons/react'
+import { SignIn, Eye, EyeSlash, CircleNotch } from '@phosphor-icons/react'
 
 const formSchema = z.object({
   username: z
@@ -43,11 +42,22 @@ const formSchema = z.object({
 })
 
 const Settings = () => {
-  const { login, isAuthenticated } = useAuth()
+  const { login, isError, isPending } = useAuth()
 
   useEffect(() => {
-    if (isAuthenticated) window.location.href = '/'
-  }, [])
+    if (isError) {
+      console.warn('erro')
+
+      form.setError('username', {
+        type: 'manual',
+        message: 'Usuário ou senha inválidos',
+      })
+      form.setError('password', {
+        type: 'manual',
+        message: 'Usuário ou senha inválidos',
+      })
+    }
+  }, [isError])
 
   const [seePassword, setSeePassword] = useState(false)
 
@@ -60,24 +70,7 @@ const Settings = () => {
   })
 
   async function onSubmit({ username, password }) {
-    const { client_id, client_secret } = serverOptions
-
-    await login({ client_id, client_secret, username, password })
-      .then((isAuth) => {
-        if (isAuth) {
-          window.location.href = '/'
-        }
-      })
-      .catch(() => {
-        form.setError('username', {
-          type: 'manual',
-          message: 'Usuário ou senha inválidos',
-        })
-        form.setError('password', {
-          type: 'manual',
-          message: 'Usuário ou senha inválidos',
-        })
-      })
+    login({ username, password })
   }
 
   return (
@@ -150,8 +143,12 @@ const Settings = () => {
                     </FormItem>
                   )}
                 />
-                <Button type="submit" className="w-full">
-                  <SignIn className="mr-2 h-5 w-5" />
+                <Button disabled={isPending} type="submit" className="w-full">
+                  {isPending ? (
+                    <CircleNotch className="mr-2 h-5 w-5 animate-spin" />
+                  ) : (
+                    <SignIn className="mr-2 h-5 w-5" />
+                  )}
                   Acessar
                 </Button>
               </form>
