@@ -1,9 +1,8 @@
-import useTicket from '@/hooks/useTicket'
 import { useEffect } from 'react'
 import defaultSound from '@/assets/sound/alert/ekiga-vm.wav'
-
-import mercure from '@/lib/mecure'
 import HomeTemplate from '@/components/templates/home-template'
+import useTicket from '@/hooks/useTicket'
+import useMercure from '@/hooks/useMercure'
 import useAudio from '@/hooks/useAudio'
 
 export default function Home() {
@@ -11,22 +10,14 @@ export default function Home() {
 
   const audio = useAudio(defaultSound, { volume: 1, playbackRate: 1 })
 
-  const fetchRequest = async () => {
+  const fetchRequest = () => {
     audio.play()
     refetch()
   }
 
   useEffect(() => fetchRequest, [])
 
-  useEffect(() => {
-    mercure.onmessage = function () {
-      fetchRequest()
-    }
-
-    mercure.onerror = function (error) {
-      console.error('Erro de conexão:', error)
-    }
-  }, [])
+  useMercure('/unidades/1/painel', fetchRequest, [])
 
   return (
     <HomeTemplate tickets={tickets}>
