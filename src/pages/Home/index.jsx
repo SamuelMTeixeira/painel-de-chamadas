@@ -6,7 +6,7 @@ import mercure from '@/lib/mecure'
 import HomeTemplate from '@/components/templates/home-template'
 
 export default function Home() {
-  const { tickets, isPending, refetch } = useTicket()
+  const { tickets, isPending, refetch, isTicketEmpty } = useTicket()
   const audioRef = useRef(null)
 
   const fetchRequest = async () => {
@@ -30,7 +30,7 @@ export default function Home() {
 
   return (
     <HomeTemplate tickets={tickets}>
-      {isPending ? (
+      {(isPending || isTicketEmpty) ? (
         <h1
           data-testid="senha"
           className="text-[12rem] font-bold text-center leading-tight font-nunito"

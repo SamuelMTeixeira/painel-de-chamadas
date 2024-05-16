@@ -19,5 +19,6 @@ export default function useTicket() {
     isLoading,
     isPending,
     refetch,
+    isTicketEmpty: !tickets?.length,
   }
 }
