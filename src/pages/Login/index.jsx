@@ -41,7 +41,7 @@ const formSchema = z.object({
     }),
 })
 
-const Settings = () => {
+export default function Login() {
   const { login, isError, isPending } = useAuth()
 
   useEffect(() => {
@@ -159,5 +159,3 @@ const Settings = () => {
     </main>
   )
 }
-
-export default Settings

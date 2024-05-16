@@ -1,5 +1,5 @@
 import Home from '@/pages/Home'
-import Settings from '@/pages/Settings'
+import Login from '@/pages/Login'
 import { createBrowserRouter, redirect } from 'react-router-dom'
 
 const router = createBrowserRouter([
@@ -21,7 +21,7 @@ const router = createBrowserRouter([
   },
   {
     path: '/login',
-    element: <Settings />,
+    element: <Login />,
     loader: async () => {
       const isAuthenticated = !!localStorage.getItem('token')
 

@@ -30,7 +30,7 @@ export default function Home() {
 
   return (
     <HomeTemplate tickets={tickets}>
-      {(isPending || isTicketEmpty) ? (
+      {isPending || isTicketEmpty ? (
         <h1
           data-testid="senha"
           className="text-[12rem] font-bold text-center leading-tight font-nunito"
