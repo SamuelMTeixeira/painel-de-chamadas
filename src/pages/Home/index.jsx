@@ -1,24 +1,24 @@
 import useTicket from '@/hooks/useTicket'
-import { useEffect, useRef } from 'react'
-import audioPath from '@/assets/sound/alert/ekiga-vm.wav'
+import { useEffect } from 'react'
+import defaultSound from '@/assets/sound/alert/ekiga-vm.wav'
 
 import mercure from '@/lib/mecure'
 import HomeTemplate from '@/components/templates/home-template'
+import useAudio from '@/hooks/useAudio'
 
 export default function Home() {
   const { tickets, isPending, refetch, isTicketEmpty } = useTicket()
-  const audioRef = useRef(null)
+
+  const audio = useAudio(defaultSound, { volume: 1, playbackRate: 1 })
 
   const fetchRequest = async () => {
-    audioRef.current.play()
+    audio.play()
     refetch()
   }
 
   useEffect(() => fetchRequest, [])
 
   useEffect(() => {
-    if (!audioRef.current) return
-
     mercure.onmessage = function () {
       fetchRequest()
     }
@@ -26,7 +26,7 @@ export default function Home() {
     mercure.onerror = function (error) {
       console.error('Erro de conexão:', error)
     }
-  }, [audioRef])
+  }, [])
 
   return (
     <HomeTemplate tickets={tickets}>
@@ -77,8 +77,6 @@ export default function Home() {
           </p>
         </article>
       )}
-
-      <audio ref={audioRef} src={audioPath} />
     </HomeTemplate>
   )
 }
