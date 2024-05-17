@@ -24,45 +24,35 @@ export default function Home() {
       {isPending || isTicketEmpty ? (
         <h1
           data-testid="senha"
-          className="text-[12rem] font-bold text-center leading-tight font-nunito"
+          className="text-[12rem] font-bold leading-tight text-center font-nunito"
         >
           A000
         </h1>
       ) : (
-        <article>
-          <div>
-            <div className="flex gap-2 justify-center">
-              <p
-                data-testid="guiche"
-                className="text-5xl text-center font-raleway leading-tight"
-              >
-                {`Guichê ${tickets[0]?.guiche}`}
-              </p>
-
-              <span className="text-5xl font-raleway leading-tight ">-</span>
-
-              <p className="text-5xl text-center font-raleway leading-tight">
-                {`Setor ${tickets[0]?.setor}`}
-              </p>
-            </div>
-
+        <article className="flex flex-col items-center space-y-4">
+          <div className="flex gap-2 justify-center text-5xl font-raleway">
             <p
-              data-testid="prioridade"
-              className="text-5xl text-center font-raleway leading-tight"
-            >
-              {`Atendimento ${tickets[0]?.description}`}
-            </p>
+              data-testid="guiche"
+              className="text-5xl font-raleway leading-tight"
+            >{`Guichê ${tickets[0]?.guiche}`}</p>
+            <span className="font-raleway leading-tight">-</span>
+            <p className="text-5xl text-center font-raleway leading-tight">{`Setor ${tickets[0]?.setor}`}</p>
           </div>
-
+          <p
+            data-testid="prioridade"
+            className="text-5xl font-raleway leading-tight"
+          >
+            {`Atendimento ${tickets[0]?.description}`}
+          </p>
           <h1
             data-testid="senha"
-            className="text-[12rem] font-bold text-center leading-tight font-nunito"
+            className="text-[12rem] font-bold leading-tight font-nunito"
           >
             {tickets[0]?.title}
           </h1>
           <p
             data-testid="paciente"
-            className="text-6xl font-medium text-center font-raleway"
+            className="text-6xl font-medium font-raleway text-center"
           >
             {tickets[0]?.paciente}
           </p>

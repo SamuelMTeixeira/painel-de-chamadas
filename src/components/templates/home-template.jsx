@@ -1,48 +1,50 @@
 import CommandActions from '@/components/home/command-actions'
 import logo from '@/assets/img/logo.png'
+import useTicket from '@/hooks/useTicket'
 
-export default function HomeTemplate({ children, tickets = [] }) {
+export default function HomeTemplate({
+  children,
+  tickets = [],
+  className = '',
+}) {
+  const { isTicketEmpty } = useTicket()
+
   return (
-    <main className="grid grid-cols-10 gap-4 h-screen">
-      <section className="col-span-7 flex justify-between flex-col">
-        <header className="flex justify-start items-center gap-4 mx-6 mt-6">
+    <main className="grid grid-cols-10 gap-4 h-screen overflow-hidden">
+      <section className="col-span-7 flex flex-col justify-between">
+        <header className="flex items-center gap-4 mx-6 mt-6">
           <img src={logo} className="w-20 h-24" alt="Logo da Prefeitura" />
           <div>
             <h4 className="font-semibold text-2xl">
               Secretaria Municipal de Saúde
             </h4>
             <h4 className="font-semibold text-2xl">
-              Prefeitura de Teófilo otoni
+              Prefeitura de Teófilo Otoni
             </h4>
           </div>
         </header>
 
-        {children}
+        <div className={className}>{children}</div>
 
         <div />
       </section>
 
-      <aside className="col-span-3 bg-primary/[.7] rounded-l-2xl flex flex-col py-2">
-        <h3 className="text-center font-bold text-6xl my-6 font-nunito">
-          Histórico
-        </h3>
+      <aside className="col-span-3 bg-primary/[.6] rounded-l-2xl flex flex-col py-2 text-center">
+        <h3 className="font-bold text-6xl my-6 font-nunito">Histórico</h3>
 
-        <div className="flex-1 flex flex-col justify-evenly items-center">
-          {tickets.length > 1 ? (
-            [...new Set(tickets.map((ticket) => ticket.title))]
-              .filter((_, index) => index > 0 && index < 6)
-              .map((uniqueTitle, index) => (
-                <p
-                  key={index}
-                  className="py-5 px-2 text-center text-5xl font-nunito font-medium"
-                >
-                  {uniqueTitle}
-                </p>
-              ))
-          ) : (
-            <p className="py-2 px-2 text-center text-5xl font-nunito">Vazio</p>
-          )}
-        </div>
+        {!isTicketEmpty && (
+          <ul className="flex flex-1 flex-col justify-center items-center gap-12">
+            {tickets.slice(1, 5).map((ticket, index) => (
+              <li
+                key={index}
+                className="py-5 px-2 text-5xl font-nunito font-medium"
+              >
+                <p>{ticket?.title}</p>
+                <p>Guichê {ticket?.guiche}</p>
+              </li>
+            ))}
+          </ul>
+        )}
       </aside>
 
       <CommandActions />
