@@ -1,5 +1,5 @@
 import serverOptions from '@/config/server'
 
-const mercureUrl = serverOptions.mercureURL
+const mercureUrl = serverOptions.mercureUrl
 
 export { mercureUrl }

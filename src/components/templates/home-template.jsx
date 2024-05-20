@@ -1,6 +1,7 @@
 import CommandActions from '@/components/home/command-actions'
 import logo from '@/assets/img/logo.png'
 import useTicket from '@/hooks/useTicket'
+import systemOptions from '@/config/system'
 
 export default function HomeTemplate({
   children,
@@ -13,20 +14,24 @@ export default function HomeTemplate({
     <main className="grid grid-cols-10 gap-4 h-screen overflow-hidden">
       <section className="col-span-7 flex flex-col justify-between">
         <header className="flex items-center gap-4 mx-6 mt-6">
-          <img src={logo} className="w-20 h-24" alt="Logo da Prefeitura" />
+          <img
+            src={logo}
+            className="h-[6rem] w-[5.5rem]"
+            alt="Logo da Prefeitura"
+          />
           <div>
+            <h4 className="font-semibold text-2xl">{systemOptions.appName}</h4>
             <h4 className="font-semibold text-2xl">
-              Secretaria Municipal de Saúde
-            </h4>
-            <h4 className="font-semibold text-2xl">
-              Prefeitura de Teófilo Otoni
+              {systemOptions.appDescription}
             </h4>
           </div>
         </header>
 
         <div className={className}>{children}</div>
 
-        <div />
+        <footer className="text-black/[.4] px-2">
+          Versão {systemOptions.version}
+        </footer>
       </section>
 
       <aside className="col-span-3 bg-primary/[.6] rounded-l-2xl flex flex-col py-2 text-center">

@@ -2,16 +2,16 @@ import axiosInstance from '@/lib/axios'
 import serverOptions from '@/config/server'
 
 async function fetchLogin({ username, password }) {
-  const { client_id, client_secret } = serverOptions
+  const { clientId, clientSecret } = serverOptions
 
-  if (!client_id || !client_secret || !username || !password) {
+  if (!clientId || !clientSecret || !username || !password) {
     return Promise.reject('parameters missing')
   }
 
   const form = new FormData()
   form.append('grant_type', 'password')
-  form.append('client_id', client_id)
-  form.append('client_secret', client_secret)
+  form.append('client_id', clientId)
+  form.append('client_secret', clientSecret)
   form.append('username', username)
   form.append('password', password)
 

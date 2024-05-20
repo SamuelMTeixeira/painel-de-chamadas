@@ -78,7 +78,7 @@ export default function Login() {
       <section className="p-10 xs:p-0 mx-auto md:w-full md:max-w-md flex flex-col items-center gap-4">
         <img
           src={logo}
-          className="h-auto w-[5.5rem]"
+          className="h-[6rem] w-[5.5rem]"
           alt="Logo da Prefeitura"
         />
 
