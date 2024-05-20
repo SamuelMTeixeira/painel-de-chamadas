@@ -50,6 +50,8 @@ services:
   mysqldb:
     image: mysql:5.7
     restart: always
+    ports:
+      - "3306:3306"
     environment:
       MYSQL_USER: 'novosga'
       MYSQL_DATABASE: 'novosga2'

@@ -14,18 +14,18 @@ export default function HomeTemplate({
 
   return (
     <main className="grid grid-cols-10 gap-4 h-screen overflow-hidden">
-      <section className="col-span-7 flex flex-col justify-between">
+      <section className="col-span-10 lg:col-span-7 flex flex-col justify-between">
         <header className="flex items-center gap-4 mx-6 mt-6">
           <img
             src={logo}
-            className="h-[6rem] w-[5.5rem]"
+            className="h-[5rem] w-[4.5rem] lg:h-[6rem] lg:w-[5.5rem]"
             alt="Logo da Prefeitura"
           />
           <div>
-            <h4 className="font-semibold text-2xl">
+            <h4 className="font-semibold text-xl lg:text-2xl">
               {unity || 'Sistema de Atendimento ao Público'}
             </h4>
-            <h4 className="font-semibold text-2xl">
+            <h4 className="font-semibold text-xl lg:text-2xl">
               {description || 'NovoSGA'}
             </h4>
           </div>
@@ -38,7 +38,7 @@ export default function HomeTemplate({
         </footer>
       </section>
 
-      <aside className="col-span-3 bg-primary/[.6] rounded-l-2xl flex flex-col py-2 text-center">
+      <aside className="hidden lg:flex flex-col lg:col-span-3 bg-primary/[.6] rounded-l-2xl  py-2 text-center">
         <h3 className="font-bold text-6xl my-6 font-nunito">Histórico</h3>
 
         {!isTicketEmpty && (

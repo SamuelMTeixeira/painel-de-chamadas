@@ -39,9 +39,9 @@ export default function CommandActions() {
 
   return (
     <CommandDialog open={open} onOpenChange={setOpen}>
-      <CommandInput placeholder="Digite um comando ou pesquise..." />
+      <CommandInput placeholder="Pesquise por um comando..." />
       <CommandList>
-        <CommandEmpty>No results found.</CommandEmpty>
+        <CommandEmpty>Nenhum resultado encontrado.</CommandEmpty>
         <CommandGroup heading="Configurações">
           <CommandItem className="aria-selected:bg-background !p-0 !m-0">
             <Button

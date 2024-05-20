@@ -33,26 +33,28 @@ export default function Home() {
           <div className="flex gap-2 justify-center text-5xl font-raleway">
             <p
               data-testid="guiche"
-              className="text-5xl font-raleway leading-tight"
+              className="text-2xl md:text-5xl font-raleway leading-tight"
             >{`Guichê ${tickets[0]?.guiche}`}</p>
-            <span className="font-raleway leading-tight">-</span>
-            <p className="text-5xl text-center font-raleway leading-tight">{`Setor ${tickets[0]?.setor}`}</p>
+            <span className="font-raleway leading-tight text-2xl md:text-5xl">
+              -
+            </span>
+            <p className="text-2xl md:text-5xl text-center font-raleway leading-tight">{`Setor ${tickets[0]?.setor}`}</p>
           </div>
           <p
             data-testid="prioridade"
-            className="text-5xl font-raleway leading-tight"
+            className="text-3xl md:text-5xl font-raleway leading-tight"
           >
             {`Atendimento ${tickets[0]?.description}`}
           </p>
           <h1
             data-testid="senha"
-            className="text-[12rem] font-bold leading-tight font-nunito"
+            className="text-8xl md:text-[8rem] lg:text-[12rem] font-bold leading-tight font-nunito"
           >
             {tickets[0]?.title}
           </h1>
           <p
             data-testid="paciente"
-            className="text-6xl font-medium font-raleway text-center"
+            className="text-3xl md:text-5xl lg:text-6xl font-medium font-raleway text-center"
           >
             {tickets[0]?.paciente}
           </p>
