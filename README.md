@@ -1,10 +1,11 @@
-# 🎉 Painel de Chamadas - Prefeitura de Teófilo Otoni
+# Painel de Chamadas - Prefeitura de Teófilo Otoni
 
 Bem-vindo ao projeto **Painel de Chamadas** - uma aplicação web para gerenciamento de filas da Secretaria Municipal de Saúde do Municipio de Teófilo Otoni. Este projeto utiliza tecnologias, como React, Vite e Tailwind CSS, proporcionando a experiência de usuário limpa, através de uma interface clean e de fácil uso.
 
 ## 🌐 Visão Geral
 
-O **Painel de Chamadas** é uma aplicação web desenvolvida para auxiliar no gerenciamento de filas da Prefeitura de Teófilo Otoni. Ele atua como um chamador de senhas, proporcionando uma solução eficaz para organizar o atendimento ao público.
+O **Painel de Chamadas** é uma aplicação web desenvolvida para auxiliar no gerenciamento de filas da Prefeitura de Teófilo Otoni. Ele atua como um chamador de senhas, proporcionando uma solução eficaz para organizar o atendimento ao público. 
+Ele utiliza o Novo Sga como servidor de filas e atendimento, e o Mercure para atualização em tempo real das informações.
 
 ### 💻 Tecnologias Utilizadas
 

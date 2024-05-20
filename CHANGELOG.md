@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v1.3.1] - 2024-05-20
+
+### Changed
+
+- build: add react query to manage data
+- refactor: add new hooks
+- style: fix responsiveness
+- refactor: change auth logic
+- refactor: optimize layout
+
 ## [v1.3.0] - 2024-05-07
 
 ### Added
