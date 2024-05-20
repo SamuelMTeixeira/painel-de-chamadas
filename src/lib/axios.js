@@ -2,7 +2,7 @@ import serverOptions from '@/config/server'
 import axios from 'axios'
 import createAuthRefreshInterceptor from 'axios-auth-refresh'
 
-const url = serverOptions.baseURL
+const url = serverOptions.baseUrl
 
 const axiosInstance = axios.create({
   timeout: 100000,
@@ -23,8 +23,8 @@ axiosInstance.interceptors.request.use(
 const refreshAuthLogic = (failedRequest) => {
   const form = new FormData()
   form.append('grant_type', 'refresh_token')
-  form.append('client_id', serverOptions.client_id)
-  form.append('client_secret', serverOptions.client_secret)
+  form.append('client_id', serverOptions.clientId)
+  form.append('client_secret', serverOptions.clientSecret)
   form.append('refresh_token', localStorage.getItem('refresh_token'))
 
   axiosInstance

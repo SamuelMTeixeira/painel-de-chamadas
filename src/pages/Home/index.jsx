@@ -1,123 +1,65 @@
+import { useEffect } from 'react'
+import defaultSound from '@/assets/sound/alert/ekiga-vm.wav'
+import HomeTemplate from '@/components/templates/home-template'
 import useTicket from '@/hooks/useTicket'
-import { useEffect, useRef, useState } from 'react'
-import logo from '@/assets/img/logo.png'
-import audioPath from '@/assets/sound/alert/ekiga-vm.wav'
-import CommandActions from '@/components/home/command-actions'
-import mercure from '@/lib/mecure'
+import useMercure from '@/hooks/useMercure'
+import useAudio from '@/hooks/useAudio'
 
 export default function Home() {
-  const [tickets, setTickets] = useState([])
+  const { tickets, isPending, refetch, isTicketEmpty } = useTicket()
 
-  const { tickets: passwords } = useTicket()
-  const audioRef = useRef(null)
+  const audio = useAudio(defaultSound, { volume: 1, playbackRate: 1 })
 
-  const fetchRequest = async () => {
-    setTickets(await passwords())
-
-    audioRef.current.play()
+  const fetchRequest = () => {
+    audio.play()
+    refetch()
   }
 
   useEffect(() => fetchRequest, [])
 
-  useEffect(() => {
-    if (!audioRef.current) return
-
-    mercure.onmessage = function () {
-      fetchRequest()
-    }
-
-    mercure.onerror = function (error) {
-      console.error('Erro de conexão:', error)
-    }
-  }, [audioRef])
+  useMercure('/unidades/1/painel', fetchRequest, [])
 
   return (
-    <main className="grid grid-cols-10 gap-4 h-screen">
-      <section className="col-span-7 flex justify-between flex-col">
-        <header className="flex justify-start items-center gap-4 mx-6 mt-6">
-          <img src={logo} className="w-20 h-24" alt="Logo da Prefeitura" />
-          <div>
-            <h4 className="font-semibold text-2xl">
-              Secretaria Municipal de Saúde
-            </h4>
-            <h4 className="font-semibold text-2xl">
-              Prefeitura de Teófilo otoni
-            </h4>
-          </div>
-        </header>
-
-        <div>
-          <div>
-            <div className="flex gap-2 justify-center">
-              <p
-                data-testid="guiche"
-                className="text-5xl text-center font-raleway leading-tight"
-              >
-                {tickets[0]?.guiche ? `Guichê ${tickets[0]?.guiche}` : ''}
-              </p>
-
-              <span className="text-5xl font-raleway leading-tight ">
-                {!!tickets[0]?.guiche && !!tickets[0]?.setor && '-'}
-              </span>
-
-              <p className="text-5xl text-center font-raleway leading-tight">
-                {tickets[0]?.setor ? `Setor ${tickets[0]?.setor}` : ''}
-              </p>
-            </div>
-
+    <HomeTemplate tickets={tickets}>
+      {isPending || isTicketEmpty ? (
+        <h1
+          data-testid="senha"
+          className="text-[12rem] font-bold leading-tight text-center font-nunito"
+        >
+          A000
+        </h1>
+      ) : (
+        <article className="flex flex-col items-center space-y-4">
+          <div className="flex gap-2 justify-center text-5xl font-raleway">
             <p
-              data-testid="prioridade"
-              className="text-5xl text-center font-raleway leading-tight"
-            >
-              {tickets[0]?.description
-                ? `Atendimento ${tickets[0]?.description}`
-                : ''}
-            </p>
+              data-testid="guiche"
+              className="text-2xl md:text-5xl font-raleway leading-tight"
+            >{`Guichê ${tickets[0]?.guiche}`}</p>
+            <span className="font-raleway leading-tight text-2xl md:text-5xl">
+              -
+            </span>
+            <p className="text-2xl md:text-5xl text-center font-raleway leading-tight">{`Setor ${tickets[0]?.setor}`}</p>
           </div>
-
+          <p
+            data-testid="prioridade"
+            className="text-3xl md:text-5xl font-raleway leading-tight"
+          >
+            {`Atendimento ${tickets[0]?.description}`}
+          </p>
           <h1
             data-testid="senha"
-            className="text-[12rem] font-bold text-center leading-tight font-nunito"
+            className="text-8xl md:text-[8rem] lg:text-[12rem] font-bold leading-tight font-nunito"
           >
-            {tickets[0]?.title || 'A000'}
+            {tickets[0]?.title}
           </h1>
           <p
             data-testid="paciente"
-            className="text-6xl font-medium text-center font-raleway"
+            className="text-3xl md:text-5xl lg:text-6xl font-medium font-raleway text-center"
           >
-            {tickets[0]?.paciente || ''}
+            {tickets[0]?.paciente}
           </p>
-        </div>
-
-        <div />
-      </section>
-
-      <aside className="col-span-3 bg-primary/[.7] rounded-l-2xl flex flex-col py-2">
-        <h3 className="text-center font-bold text-6xl my-6 font-nunito">
-          Histórico
-        </h3>
-
-        <div className="flex-1 flex flex-col justify-evenly items-center">
-          {tickets.length > 1 ? (
-            [...new Set(tickets.map((ticket) => ticket.title))]
-              .filter((_, index) => index > 0 && index < 6)
-              .map((uniqueTitle, index) => (
-                <p
-                  key={index}
-                  className="py-5 px-2 text-center text-5xl font-nunito font-medium"
-                >
-                  {uniqueTitle}
-                </p>
-              ))
-          ) : (
-            <p className="py-2 px-2 text-center text-5xl font-nunito">Vazio</p>
-          )}
-        </div>
-      </aside>
-
-      <CommandActions />
-
-      <audio ref={audioRef} src={audioPath} />
-    </main>
+        </article>
+      )}
+    </HomeTemplate>
   )
 }
