@@ -2,6 +2,7 @@ import CommandActions from '@/components/home/command-actions'
 import logo from '@/assets/img/logo.png'
 import useTicket from '@/hooks/useTicket'
 import systemOptions from '@/config/system'
+import useUnity from '@/hooks/useUnity'
 
 export default function HomeTemplate({
   children,
@@ -9,6 +10,7 @@ export default function HomeTemplate({
   className = '',
 }) {
   const { isTicketEmpty } = useTicket()
+  const { unity, description } = useUnity()
 
   return (
     <main className="grid grid-cols-10 gap-4 h-screen overflow-hidden">
@@ -20,9 +22,11 @@ export default function HomeTemplate({
             alt="Logo da Prefeitura"
           />
           <div>
-            <h4 className="font-semibold text-2xl">{systemOptions.appName}</h4>
             <h4 className="font-semibold text-2xl">
-              {systemOptions.appDescription}
+              {unity || 'Sistema de Atendimento ao Público'}
+            </h4>
+            <h4 className="font-semibold text-2xl">
+              {description || 'NovoSGA'}
             </h4>
           </div>
         </header>
